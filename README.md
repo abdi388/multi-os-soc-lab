@@ -301,3 +301,15 @@ rule activation confirmed
 - manual auditctl rules are the fastest way to test functionality  
 - audit logs confirm real system activity at syscall level  
 - troubleshooting is a core part of Linux security monitoring  
+
+---
+
+## 🪟 Windows Sysmon Monitoring (Continuation of SOC Lab)
+
+Following the Linux auditd investigation, I extended the lab into a Windows environment using Sysmon to capture and analyze endpoint-level events. This allowed me to compare Linux audit logging with Windows telemetry in a unified SOC workflow.
+
+The goal of this phase was to:
+- Enable Sysmon logging on Windows VM
+- Generate controlled system events
+- Analyze logs using Event Viewer / tooling
+- Correlate activity between Linux and Windows systems
