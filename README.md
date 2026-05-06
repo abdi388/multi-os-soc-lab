@@ -28,6 +28,7 @@ auditctl -l
 ```
 
 I first tried to check existing audit rules, but the system showed the command was missing.
+![Step 2](screenshots/Screenshot%202026-05-05%20192320.png)
 
 ```bash
 Command 'auditctl' not found, but can be installed with:
@@ -41,6 +42,8 @@ sudo apt install auditd
 ```bash
 sudo apt install auditd
 ```
+![Step 3](screenshots/Screenshot%202026-05-05%20192436.png)
+
 
 I installed the audit framework so I could use auditctl and manage audit rules.
 
@@ -158,6 +161,7 @@ I renamed the file to match expected format.
 ```bash
 sudo mv audit.rules /etc/audit/rules.d/
 ```
+![Step 4](screenshots/Screenshot%202026-05-05%20193758.png)
 
 I re-added the corrected rules file into the audit rules directory.
 
@@ -194,6 +198,7 @@ sudo augenrules --load
 ```
 
 I tried manually loading rules using the rule generator tool.
+![Step 5](screenshots/Screenshot%202026-05-05%20193811.png)
 
 ```bash
 No change
@@ -210,6 +215,7 @@ This indicated the rules file was not compatible or not parsed correctly.
 ```bash
 sudo auditctl -l
 ```
+![Step 7](screenshots/Screenshot%202026-05-05%20193854.png)
 
 I checked system state again and saw default audit rules instead of my custom rules.
 
@@ -222,6 +228,7 @@ sudo systemctl stop auditd
 sudo rm /etc/audit/rules.d/audit.rules
 sudo systemctl restart auditd
 ```
+![Step 8](screenshots/Screenshot%202026-05-05%20194111.png)
 
 I removed the broken rules file completely and restarted auditd to reset configuration.
 
@@ -252,6 +259,7 @@ I added a live monitoring rule to track any write/access activity on /etc/passwd
 ```bash
 sudo cat /etc/passwd
 ```
+![Step 9](screenshots/Screenshot%202026-05-05%20194126.png)
 
 I triggered file access to generate a log event.
 
@@ -264,6 +272,7 @@ sudo ausearch -k user_changes
 ```
 
 I searched audit logs using the key I assigned earlier.
+![Step 10](screenshots/Screenshot%202026-05-05%20194139.png)
 
 ```bash
 event successfully logged
