@@ -5,6 +5,7 @@
 This project is a **Multi-OS SOC Home Lab** built using Microsoft Azure. I deployed two virtual machines inside a cloud environment: a Linux VM and a Windows VM. The purpose of this lab is to simulate a real-world Security Operations Center (SOC) environment where system activity is monitored, logged, and analyzed.
 
 At first, I set up a home lab using Azure Cloud to create an isolated and controlled environment for security testing. This allowed me to simulate real enterprise infrastructure rather than using a local machine.
+![Azure VM Infrastructure](screenshots/Screenshot%202026-05-05%20174958.png)
 
 The lab is divided into two main parts:
 - 🐧 Linux Auditd Monitoring (this section)
