@@ -9,7 +9,7 @@ At first, I set up a home lab using Azure Cloud to create an isolated and contro
 
 The lab is divided into two main parts:
 - 🐧 Linux Auditd Monitoring (this section)
-- 🪟 Windows Sysmon Monitoring (to be added later)
+- 🪟 Windows Sysmon Monitoring (next section)
 
 ---
 
