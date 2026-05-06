@@ -314,6 +314,9 @@ The goal of this phase was to:
 - Analyze logs using Event Viewer / tooling
 - Correlate activity between Linux and Windows systems
 
+This was event viewer before sysmon:
+![Step 1](screenshots/Screenshot%202026-05-05%20224159.png)
+  
 # 🪟 Windows Sysmon Monitoring Lab
 
 ## 🛠️ 1. Environment Setup
@@ -350,7 +353,9 @@ I installed Sysmon as a Windows service using a configuration file.
 ```powershell
 cd Sysmon
 .\Sysmon64.exe -i ..\config.xml
+
 ```
+![Step 2](screenshots/Screenshot%202026-05-05%20224407.png)
 
 ---
 
