@@ -313,3 +313,129 @@ The goal of this phase was to:
 - Generate controlled system events
 - Analyze logs using Event Viewer / tooling
 - Correlate activity between Linux and Windows systems
+
+# 🪟 Windows Sysmon Monitoring Lab
+
+## 🛠️ 1. Environment Setup
+
+I started by preparing a working directory for Sysmon on my Windows VM.
+
+```powershell
+mkdir C:\Sysmon
+cd C:\Sysmon
+```
+
+---
+
+## 📥 2. Download Sysmon
+
+I downloaded Sysmon (Sysinternals toolset) directly from Microsoft.
+
+```powershell
+Invoke-WebRequest -Uri "https://download.sysinternals.com/files/Sysmon.zip" -OutFile "Sysmon.zip"
+```
+
+Then I extracted it:
+
+```powershell
+Expand-Archive Sysmon.zip -DestinationPath .
+```
+
+---
+
+## ⚙️ 3. Install Sysmon
+
+I installed Sysmon as a Windows service using a configuration file.
+
+```powershell
+cd Sysmon
+.\Sysmon64.exe -i ..\config.xml
+```
+
+---
+
+## ✅ 4. Verify Sysmon is Running
+
+I confirmed that Sysmon was installed and actively running as a service.
+
+```powershell
+Get-Service sysmon64
+```
+
+---
+
+## 🎯 5. Generate Activity (Testing Phase)
+
+To generate logs for analysis, I executed normal system activity:
+
+```powershell
+ping google.com
+notepad
+calc
+```
+
+These actions were used to trigger Sysmon event logging:
+
+- Process creation events  
+- Network connections  
+- DNS resolution logs  
+
+---
+
+## 📊 6. Log Analysis (Event Viewer)
+
+I opened Event Viewer to inspect Sysmon logs:
+
+Event Viewer →  
+Applications and Services Logs →  
+Microsoft →  
+Windows →  
+Sysmon →  
+Operational  
+
+I focused on the following Event IDs:
+
+- Event ID 1 → Process Creation (notepad.exe, calc.exe)
+- Event ID 3 → Network Connections (ping to google.com)
+- Event ID 22 → DNS Queries (google.com resolution)
+
+---
+
+## 🔍 7. Optional Log Query (PowerShell)
+
+I also queried Sysmon logs directly for quick inspection:
+
+```powershell
+Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -MaxEvents 20
+```
+
+---
+
+## 🧠 8. Correlation of Generated Activity
+
+I reviewed the earlier generated test activities (ping, notepad, calc) and correlated them with Sysmon logs.
+
+This allowed me to confirm that:
+
+- All executed processes were captured in Event ID 1 logs
+- Network activity from `ping google.com` was recorded
+- DNS resolution events were logged successfully
+- User-driven activity matched system telemetry in Event Viewer
+
+---
+
+## 🧠 What I Learned
+
+Through this lab, I learned how endpoint visibility works in a SOC environment. Sysmon provided deep insights into:
+
+- which processes were executed  
+- how applications interact with the network  
+- how DNS queries are generated from simple actions  
+
+This helped me understand how SOC analysts investigate system behavior using telemetry rather than assumptions.
+
+---
+
+## 🚀 Final Outcome
+
+I successfully built a basic endpoint monitoring setup using Sysmon on a Windows Azure VM, generated controlled activity, and analyzed the resulting security telemetry.
