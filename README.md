@@ -358,14 +358,25 @@ cd Sysmon
 ![Step 2](screenshots/Screenshot%202026-05-05%20224407.png)
 
 ---
+![Step 3](screenshots/Screenshot%202026-05-05%20224514.png)
 
-## ✅ 4. Verify Sysmon is Running
+## ✅ 4. Verify Sysmon is Running & Update Configuration
 
-I confirmed that Sysmon was installed and actively running as a service.
+I confirmed that Sysmon was installed and actively running as a Windows service. After verifying the service, I updated the Sysmon configuration to ensure the latest rules were applied.
 
 ```powershell
 Get-Service sysmon64
 ```
+
+To update the existing Sysmon configuration, I used:
+
+```powershell
+.\Sysmon64.exe -c 
+```
+![Step 4](screenshots/Screenshot%202026-05-05%20224613.png)
+This ensured that Sysmon was actively running with the updated configuration without reinstalling the service.
+
+---
 
 ---
 
@@ -384,6 +395,9 @@ These actions were used to trigger Sysmon event logging:
 - Process creation events  
 - Network connections  
 - DNS resolution logs  
+![Step 7](screenshots/Screenshot%202026-05-05%20230218.png)
+![Step 8](screenshots/Screenshot%202026-05-05%20230406.png)
+![Step 9](screenshots/Screenshot%202026-05-05%20230414.png)
 
 ---
 
@@ -403,7 +417,7 @@ I focused on the following Event IDs:
 - Event ID 1 → Process Creation (notepad.exe, calc.exe)
 - Event ID 3 → Network Connections (ping to google.com)
 - Event ID 22 → DNS Queries (google.com resolution)
-
+![Step 6](screenshots/Screenshot%202026-05-05%20225241.png)
 ---
 
 ## 🔍 7. Optional Log Query (PowerShell)
